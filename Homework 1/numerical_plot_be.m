@@ -27,17 +27,15 @@ function [t, y_be, y_ex] = run(N, T)
     k = T/N;
     t = 0:k:T;
     y_be = zeros(1, N+1);
-    y_be(1) = 1;
+    y_be(1) = -2;
 
     for n = 1:N
         %y_be(n+1) = (y_be(n) + 3 * k + k * exp(-t(n+1))) / (1 + k); % Problem 1
-        y_be(n+1) = -0.25 * (sqrt(y_be(n)^2 + 2 * y_be(n) + 12 * k * t(n+1)^2 + 40 * k * t(n+1) + 4 * k + 5)) + y_be(n) - 1; %Problem 2
-            %Fix the missing 1/2 ^^^^^^^^
-
+        y_be(n+1) = 0.5 * (-sqrt(y_be(n)^2 + 2 * y_be(n) + 6 * k * (t(n+1))^2 + 20 * k * t(n+1) + 2 * k + 1) + y_be(n) - 1); %Problem 2
+        
     end
     %y_ex =@(x) t.*exp(-t) -2.*exp(-t) + 3; % Problem 1
-    y_ex =@(x) sqrt(1+(1/2*t.^3)+(5/2*t.^2)+(1/2*t))-1 %correct
-    %y_ex = [y_ex -y_ex]
+    y_ex =@(x) -sqrt(1+(t.^3)+((5*t.^2))+(t))-1 % Problem 2
 end
 
 
